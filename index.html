@@ -9,13 +9,20 @@
             font-family: "Georgia", serif;
             text-align: center;
             color: #880e4f;
+            overflow-x: hidden;
+            position: relative;
         }
+
         .container {
             margin-top: 60px;
+            position: relative;
+            z-index: 2;
         }
+
         h1, h2 {
             text-shadow: 0 0 10px rgba(136,14,79,0.7);
         }
+
         button {
             padding: 12px 24px;
             margin: 8px;
@@ -26,24 +33,96 @@
             font-size: 16px;
             cursor: pointer;
         }
+
         button:hover {
             background: #ff4081;
         }
+
         input {
             padding: 10px;
             border-radius: 5px;
             border: 2px solid #ff5fa2;
         }
+
         .hidden {
             display: none;
         }
+
         .message {
             font-size: 24px;
             margin-top: 30px;
         }
+
+        .glow {
+            font-size: 50px;
+            color: #ff4da6;
+            text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff1a75, 0 0 40px #ff0066;
+            animation: pulse 1.5s infinite;
+        }
+
+        .glow-text {
+            font-size: 22px;
+            color: #ff1a75;
+            text-shadow: 0 0 5px #ff4da6;
+            margin-top: 20px;
+        }
+
+        .heart-button {
+            font-size: 20px;
+            padding: 12px 30px;
+            background: #ff5fa2;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 20px;
+            animation: bounce 1.2s infinite;
+        }
+
+        .heart-button:hover {
+            background: #ff4081;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Floating hearts animation */
+        .floating-heart {
+            position: absolute;
+            font-size: 20px;
+            color: #ff4081;
+            animation: floatUp linear forwards;
+            z-index: 1;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-300px); opacity: 0; }
+        }
+
+        /* Confetti style */
+        .confetti {
+            position: absolute;
+            font-size: 20px;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
+
+<!-- Floating hearts container -->
+<div id="hearts-container"></div>
+
+<!-- Confetti container -->
+<div id="confetti-container"></div>
 
 <div class="container">
 
@@ -61,65 +140,113 @@
 
     <!-- QUIZ -->
     <div id="quiz" class="hidden">
-        <h1>Love Quiz 💖</h1>
+        <h1 class="glow">Love Quiz 💖</h1>
 
+        <!-- Questions 1-10 -->
         <div id="q1">
-            <h2>If I were a dessert, what would I be? 🍰</h2>
-            <button onclick="checkQ1('A')">A) Chocolate cake</button>
-            <button onclick="checkQ1('B')">B) Strawberry ice cream</button>
-            <button onclick="checkQ1('C')">C) Spicy chili 😏</button>
+            <h2>What do I love most about you? 💖</h2>
+            <button onclick="checkQ1('C')">A) Your smile 😊</button>
+            <button onclick="checkQ1('C')">B) Your laugh 😆</button>
+            <button onclick="checkQ1('C')">C) Everything about you ❤️</button>
             <p id="error1" style="color:red;"></p>
         </div>
 
         <div id="q2" class="hidden">
-            <h2>Which nickname would I secretly use? 💌</h2>
-            <button onclick="checkQ2('A')">A) Snugglebug</button>
-            <button onclick="checkQ2('B')">B) Tiny human</button>
-            <button onclick="checkQ2('C')">C) Cute disaster 😅</button>
+            <h2>Which emoji shows how I feel when I see you? 🥰😎😂</h2>
+            <button onclick="checkQ2('A')">A) 🥰</button>
+            <button onclick="checkQ2('A')">B) 😎</button>
+            <button onclick="checkQ2('A')">C) 😂</button>
             <p id="error2" style="color:red;"></p>
         </div>
 
         <div id="q3" class="hidden">
-            <h2>Which snack would I steal without asking? 🍫🍕🍦</h2>
-            <button onclick="checkQ3('A')">A) Chocolate</button>
-            <button onclick="checkQ3('B')">B) Pizza</button>
-            <button onclick="checkQ3('C')">C) Ice cream</button>
+            <h2>What’s the most likely nickname I’d give you? 💌</h2>
+            <button onclick="checkQ3('C')">A) Snugglebug</button>
+            <button onclick="checkQ3('C')">B) Cutiepie</button>
+            <button onclick="checkQ3('C')">C) Fish</button>
             <p id="error3" style="color:red;"></p>
         </div>
 
         <div id="q4" class="hidden">
-            <h2>What emoji shows how I feel when I see you? 🥰😎😂</h2>
-            <button onclick="checkQ4('A')">A) 🥰</button>
-            <button onclick="checkQ4('B')">B) 😎</button>
-            <button onclick="checkQ4('C')">C) 😂</button>
+            <h2>If we were a couple in a movie, what would be our scene? 🎬</h2>
+            <button onclick="checkQ4('C')">A) Walking in the rain ☔</button>
+            <button onclick="checkQ4('C')">B) Dancing under the stars ✨</button>
+            <button onclick="checkQ4('C')">C) Eating on the couch 🛋️</button>
             <p id="error4" style="color:red;"></p>
         </div>
 
         <div id="q5" class="hidden">
-            <h2>Final: What happens next? 😘</h2>
-            <button onclick="checkQ5('A')">A) Big hug 🤗</button>
-            <button onclick="checkQ5('B')">B) Cheesy grin 😁</button>
-            <button onclick="checkQ5('C')">C) All of the above 😏💖</button>
+            <h2>If I were a worm, would you still love me? 🐛</h2>
+            <button onclick="checkQ5('A')">A) Yes, forever ❤️</button>
+            <button onclick="checkQ5('A')">B) Maybe… depends 😅</button>
+            <button onclick="checkQ5('A')">C) Ew… no way 😳</button>
             <p id="error5" style="color:red;"></p>
+        </div>
+
+        <div id="q6" class="hidden">
+            <h2>What would I do if you steal my fries? 🍟</h2>
+            <button onclick="checkQ6('C')">A) Give you a kiss 😘</button>
+            <button onclick="checkQ6('C')">B) Cry dramatically 😢</button>
+            <button onclick="checkQ6('C')">C) Plot my sneaky revenge 😎</button>
+            <p id="error6" style="color:red;"></p>
+        </div>
+
+        <div id="q7" class="hidden">
+            <h2>If I were a superhero, my power would be… 🦸‍♂️</h2>
+            <button onclick="checkQ7('A')">A) Making you smile instantly 😄</button>
+            <button onclick="checkQ7('A')">B) Hugging forever 🤗</button>
+            <button onclick="checkQ7('A')">C) Eating chocolate super fast 🍫</button>
+            <p id="error7" style="color:red;"></p>
+        </div>
+
+        <div id="q8" class="hidden">
+            <h2>What would I text you at 3 AM? 📱</h2>
+            <button onclick="checkQ8('B')">A) “I’m hungry… come over 😏”</button>
+            <button onclick="checkQ8('B')">B) “Thinking about you again 😍”</button>
+            <button onclick="checkQ8('B')">C) “Send memes pls 😂”</button>
+            <p id="error8" style="color:red;"></p>
+        </div>
+
+        <div id="q9" class="hidden">
+            <h2>Which outfit would I totally rock just to impress you? 👗👕</h2>
+            <button onclick="checkQ9('C')">A) Pajamas all day 😴</button>
+            <button onclick="checkQ9('C')">B) Fancy suit/dress ✨</button>
+            <button onclick="checkQ9('C')">C) Something ridiculously sexy 😜</button>
+            <p id="error9" style="color:red;"></p>
+        </div>
+
+        <div id="q10" class="hidden">
+            <h2>If I had to serenade you, what would I sing? 🎤</h2>
+            <button onclick="checkQ10('C')">A) Cheesy love song 💖</button>
+            <button onclick="checkQ10('C')">B) Dramatic opera 😎</button>
+            <button onclick="checkQ10('C')">C) Weird annoying sounds 😂</button>
+            <p id="error10" style="color:red;"></p>
         </div>
     </div>
 
     <!-- FINAL MESSAGE -->
     <div id="loveMessage" class="hidden message">
-        <h1>You Did It! 💖</h1>
-        <p>You unlocked my quiz — and my heart ❤️</p><br>
-        <p>Happy Valentine’s Day 😍</p><br>
-        <button onclick="yes()">YES ❤️</button>
+        <h1 class="glow">💖 You Did It, My Love! 💖</h1>
+        <p class="glow-text">
+            Congratulations, you unlocked my heart ❤️<br>
+            Every laugh, every hug, every silly moment makes my world brighter 🌟<br>
+            Happy Valentine’s Day 😍<br>
+            I can’t wait for all the adventures, fun, and love we’ll share forever 💌<br>
+            Forever yours, <br>
+            <strong>Sarah 💕</strong>
+        </p>
+        <button onclick="yes()" class="heart-button">💞 Yes, I’m yours 💞</button>
     </div>
 
 </div>
 
 <!-- Piano Background Music -->
 <audio id="music" loop autoplay>
-    <source src="mixkit-love-787.mp3" type="audio/mpeg">
+    <source src="romantic-piano.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+    // Password
     function checkPassword() {
         let p = document.getElementById("password").value;
         if(p === "143") {
@@ -129,13 +256,75 @@
             document.getElementById("error").innerText = "Wrong password 💔";
         }
     }
-    function checkQ1(a) { if(a==='A'){ hideShow("q1","q2"); } else{ document.getElementById("error1").innerText="Oops 😜"; } }
-    function checkQ2(a) { if(a==='A'){ hideShow("q2","q3"); } else{ document.getElementById("error2").innerText="Try again! 😏"; } }
-    function checkQ3(a) { if(a==='A'){ hideShow("q3","q4"); } else{ document.getElementById("error3").innerText="Wrong! 💔"; } }
-    function checkQ4(a) { if(a==='A'){ hideShow("q4","q5"); } else{ document.getElementById("error4").innerText="Not yet 😅"; } }
-    function checkQ5(a) { if(a==='C'){ document.getElementById("q5").classList.add("hidden"); document.getElementById("loveMessage").classList.remove("hidden"); } else{ document.getElementById("error5").innerText="Almost! ❤️"; } }
-    function hideShow(hideId, showId){ document.getElementById(hideId).classList.add("hidden"); document.getElementById(showId).classList.remove("hidden"); }
-    function yes(){ alert("You just made the best decision of your life ❤️"); }
+
+    // Question checking
+    function checkQ1(a){ a==='C'? nextQ("q1","q2") : wrong("error1"); }
+    function checkQ2(a){ a==='A'? nextQ("q2","q3") : wrong("error2"); }
+    function checkQ3(a){ a==='C'? nextQ("q3","q4") : wrong("error3"); }
+    function checkQ4(a){ a==='C'? nextQ("q4","q5") : wrong("error4"); }
+    function checkQ5(a){ a==='A'? nextQ("q5","q6") : wrong("error5"); }
+    function checkQ6(a){ a==='C'? nextQ("q6","q7") : wrong("error6"); }
+    function checkQ7(a){ a==='A'? nextQ("q7","q8") : wrong("error7"); }
+    function checkQ8(a){ a==='B'? nextQ("q8","q9") : wrong("error8"); }
+    function checkQ9(a){ a==='C'? nextQ("q9","q10") : wrong("error9"); }
+    function checkQ10(a){ a==='C'? showFinal() : wrong("error10"); }
+
+    function nextQ(hide, show){
+        document.getElementById(hide).classList.add("hidden");
+        document.getElementById(show).classList.remove("hidden");
+    }
+
+    function wrong(id){
+        document.getElementById(id).innerText="Oops! Try again 😅";
+    }
+
+    function showFinal(){
+        document.getElementById("q10").classList.add("hidden");
+        document.getElementById("loveMessage").classList.remove("hidden");
+    }
+
+    // Yes button + confetti
+    function yes() {
+        alert("You just made the best decision of your life ❤️");
+        launchConfetti();
+    }
+
+    function launchConfetti() {
+        const container = document.getElementById("confetti-container");
+        for(let i=0;i<150;i++){
+            const confetti = document.createElement("div");
+            confetti.innerText = "🎉💖✨";
+            confetti.className = "confetti";
+            confetti.style.left = Math.random()*100 + "%";
+            confetti.style.top = "-10px";
+            confetti.style.fontSize = (10+Math.random()*20)+"px";
+            confetti.style.opacity = Math.random();
+            confetti.style.transform = `rotate(${Math.random()*360}deg)`;
+            confetti.style.transition = "top 3s linear, transform 3s linear, opacity 3s linear";
+            container.appendChild(confetti);
+
+            setTimeout(()=>{
+                confetti.style.top = "100%";
+                confetti.style.transform = `rotate(${Math.random()*720}deg)`;
+                confetti.style.opacity = 0;
+            },50);
+
+            setTimeout(()=>container.removeChild(confetti),3050);
+        }
+    }
+
+    // Floating hearts
+    function createHeart() {
+        const container = document.getElementById("hearts-container");
+        const heart = document.createElement("div");
+        heart.innerText = "💖";
+        heart.className = "floating-heart";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+        container.appendChild(heart);
+        setTimeout(()=>{ container.removeChild(heart); }, 6000);
+    }
+    setInterval(createHeart, 500);
 </script>
 
 </body>
