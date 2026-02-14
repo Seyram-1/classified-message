@@ -1,53 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Private Message</title>
+    <title>Valentine’s Quiz ❤️</title>
     <style>
         body {
             margin: 0;
-            background: black;
-            color: #ff4da6;
-            font-family: monospace;
+            background: linear-gradient(135deg, #ffdee1, #fceefe);
+            font-family: "Georgia", serif;
             text-align: center;
+            color: #880e4f;
         }
-
         .container {
-            margin-top: 120px;
+            margin-top: 60px;
         }
-
+        h1, h2 {
+            text-shadow: 0 0 10px rgba(136,14,79,0.7);
+        }
+        button {
+            padding: 12px 24px;
+            margin: 8px;
+            border: none;
+            border-radius: 8px;
+            background: #ff5fa2;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #ff4081;
+        }
         input {
             padding: 10px;
             border-radius: 5px;
-            border: none;
+            border: 2px solid #ff5fa2;
         }
-
-        button {
-            padding: 10px 20px;
-            margin-top: 15px;
-            border: none;
-            border-radius: 5px;
-            background: #ff4da6;
-            color: white;
-            cursor: pointer;
-        }
-
         .hidden {
             display: none;
         }
-
-        .glow {
-            font-size: 60px;
-            color: #ff4da6;
-            text-shadow: 0 0 10px #ff4da6,
-                         0 0 20px #ff1a75,
-                         0 0 40px #ff0066;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.6; }
-            50% { opacity: 1; }
-            100% { opacity: 0.6; }
+        .message {
+            font-size: 24px;
+            margin-top: 30px;
         }
     </style>
 </head>
@@ -57,65 +49,94 @@
 
     <!-- PASSWORD SCREEN -->
     <div id="login">
-        <h2>Enter Password to Decrypt Message 💌</h2>
+        <h2>Enter Password to Decrypt My Heart 💌</h2>
         <input type="password" id="password" placeholder="Enter password">
-        <br>
-        <button onclick="checkPassword()">Unlock</button>
+        <br><br>
+        <button onclick="checkPassword()">Unlock ❤️</button>
+        <p id="hint" style="color:#ff4081; margin-top:10px;">
+            Hint: It’s the number I can’t stop thinking about 😉
+        </p>
         <p id="error" style="color:red;"></p>
     </div>
 
-    <!-- MESSAGE SCREEN -->
-    <div id="message" class="hidden">
-        <h1 class="glow">SOLOMON</h1>
+    <!-- QUIZ -->
+    <div id="quiz" class="hidden">
+        <h1>Love Quiz 💖</h1>
 
-        <h2>Click to Reveal Your Valentine Message ❤️</h2>
-        <button onclick="reveal()">Reveal</button>
-
-        <div id="loveMessage" class="hidden">
-            <p>
-                From Greater Accra to Central Region,<br>
-                distance has nothing on us.<br><br>
-
-                You are my favorite notification,<br>
-                my safest place,<br>
-                and my forever person.<br><br>
-
-                Happy Valentine's Day 💖<br><br>
-
-                Will you stay with me forever?
-            </p>
-
-            <button onclick="yes()">YES ❤️</button>
+        <div id="q1">
+            <h2>If I were a dessert, what would I be? 🍰</h2>
+            <button onclick="checkQ1('A')">A) Chocolate cake</button>
+            <button onclick="checkQ1('B')">B) Strawberry ice cream</button>
+            <button onclick="checkQ1('C')">C) Spicy chili 😏</button>
+            <p id="error1" style="color:red;"></p>
         </div>
+
+        <div id="q2" class="hidden">
+            <h2>Which nickname would I secretly use? 💌</h2>
+            <button onclick="checkQ2('A')">A) Snugglebug</button>
+            <button onclick="checkQ2('B')">B) Tiny human</button>
+            <button onclick="checkQ2('C')">C) Cute disaster 😅</button>
+            <p id="error2" style="color:red;"></p>
+        </div>
+
+        <div id="q3" class="hidden">
+            <h2>Which snack would I steal without asking? 🍫🍕🍦</h2>
+            <button onclick="checkQ3('A')">A) Chocolate</button>
+            <button onclick="checkQ3('B')">B) Pizza</button>
+            <button onclick="checkQ3('C')">C) Ice cream</button>
+            <p id="error3" style="color:red;"></p>
+        </div>
+
+        <div id="q4" class="hidden">
+            <h2>What emoji shows how I feel when I see you? 🥰😎😂</h2>
+            <button onclick="checkQ4('A')">A) 🥰</button>
+            <button onclick="checkQ4('B')">B) 😎</button>
+            <button onclick="checkQ4('C')">C) 😂</button>
+            <p id="error4" style="color:red;"></p>
+        </div>
+
+        <div id="q5" class="hidden">
+            <h2>Final: What happens next? 😘</h2>
+            <button onclick="checkQ5('A')">A) Big hug 🤗</button>
+            <button onclick="checkQ5('B')">B) Cheesy grin 😁</button>
+            <button onclick="checkQ5('C')">C) All of the above 😏💖</button>
+            <p id="error5" style="color:red;"></p>
+        </div>
+    </div>
+
+    <!-- FINAL MESSAGE -->
+    <div id="loveMessage" class="hidden message">
+        <h1>You Did It! 💖</h1>
+        <p>You unlocked my quiz — and my heart ❤️</p><br>
+        <p>Happy Valentine’s Day 😍</p><br>
+        <button onclick="yes()">YES ❤️</button>
     </div>
 
 </div>
 
-<audio id="music" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+<!-- Piano Background Music -->
+<audio id="music" loop autoplay>
+    <source src="mixkit-love-787.mp3" type="audio/mpeg">
 </audio>
 
 <script>
     function checkPassword() {
-        var pass = document.getElementById("password").value;
-        if (pass === "143") {   // CHANGE THIS PASSWORD
+        let p = document.getElementById("password").value;
+        if(p === "143") {
             document.getElementById("login").classList.add("hidden");
-            document.getElementById("message").classList.remove("hidden");
-            document.getElementById("music").play();
+            document.getElementById("quiz").classList.remove("hidden");
         } else {
             document.getElementById("error").innerText = "Wrong password 💔";
         }
     }
-
-    function reveal() {
-        document.getElementById("loveMessage").classList.remove("hidden");
-    }
-
-    function yes() {
-        alert("You just made the best decision of your life 💍❤️");
-    }
+    function checkQ1(a) { if(a==='A'){ hideShow("q1","q2"); } else{ document.getElementById("error1").innerText="Oops 😜"; } }
+    function checkQ2(a) { if(a==='A'){ hideShow("q2","q3"); } else{ document.getElementById("error2").innerText="Try again! 😏"; } }
+    function checkQ3(a) { if(a==='A'){ hideShow("q3","q4"); } else{ document.getElementById("error3").innerText="Wrong! 💔"; } }
+    function checkQ4(a) { if(a==='A'){ hideShow("q4","q5"); } else{ document.getElementById("error4").innerText="Not yet 😅"; } }
+    function checkQ5(a) { if(a==='C'){ document.getElementById("q5").classList.add("hidden"); document.getElementById("loveMessage").classList.remove("hidden"); } else{ document.getElementById("error5").innerText="Almost! ❤️"; } }
+    function hideShow(hideId, showId){ document.getElementById(hideId).classList.add("hidden"); document.getElementById(showId).classList.remove("hidden"); }
+    function yes(){ alert("You just made the best decision of your life ❤️"); }
 </script>
 
 </body>
 </html>
-
