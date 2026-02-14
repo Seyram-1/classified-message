@@ -1,31 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valentine’s Quiz ❤️</title>
     <style>
         body {
             margin: 0;
-            background: linear-gradient(135deg, #ffdee1, #fceefe);
+            padding: 20px;
             font-family: "Georgia", serif;
+            background: black;
+            color: #ff4da6;
             text-align: center;
-            color: #880e4f;
             overflow-x: hidden;
-            position: relative;
+            font-size: 16px;
         }
 
         .container {
-            margin-top: 60px;
-            position: relative;
-            z-index: 2;
+            margin-top: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        h1, h2 {
-            text-shadow: 0 0 10px rgba(136,14,79,0.7);
+        h1, h2, p {
+            word-wrap: break-word;
         }
 
         button {
+            width: 80%;
+            max-width: 300px;
             padding: 12px 24px;
-            margin: 8px;
+            margin: 10px 0;
             border: none;
             border-radius: 8px;
             background: #ff5fa2;
@@ -39,48 +45,21 @@
         }
 
         input {
+            width: 80%;
+            max-width: 300px;
             padding: 10px;
             border-radius: 5px;
             border: 2px solid #ff5fa2;
+            margin-bottom: 15px;
         }
 
-        .hidden {
-            display: none;
-        }
-
-        .message {
-            font-size: 24px;
-            margin-top: 30px;
-        }
+        .hidden { display: none; }
 
         .glow {
-            font-size: 50px;
+            font-size: 40px;
             color: #ff4da6;
             text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff1a75, 0 0 40px #ff0066;
             animation: pulse 1.5s infinite;
-        }
-
-        .glow-text {
-            font-size: 22px;
-            color: #ff1a75;
-            text-shadow: 0 0 5px #ff4da6;
-            margin-top: 20px;
-        }
-
-        .heart-button {
-            font-size: 20px;
-            padding: 12px 30px;
-            background: #ff5fa2;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            margin-top: 20px;
-            animation: bounce 1.2s infinite;
-        }
-
-        .heart-button:hover {
-            background: #ff4081;
         }
 
         @keyframes pulse {
@@ -89,12 +68,18 @@
             100% { opacity: 0.6; }
         }
 
+        .heart-button {
+            font-size: 18px;
+            padding: 12px 30px;
+            border-radius: 12px;
+            animation: bounce 1.2s infinite;
+        }
+
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-8px); }
         }
 
-        /* Floating hearts animation */
         .floating-heart {
             position: absolute;
             font-size: 20px;
@@ -108,29 +93,26 @@
             100% { transform: translateY(-300px); opacity: 0; }
         }
 
-        /* Confetti style */
         .confetti {
             position: absolute;
             font-size: 20px;
             pointer-events: none;
         }
+
     </style>
 </head>
 <body>
 
-<!-- Floating hearts container -->
 <div id="hearts-container"></div>
-
-<!-- Confetti container -->
 <div id="confetti-container"></div>
 
 <div class="container">
 
     <!-- PASSWORD SCREEN -->
     <div id="login">
-        <h2>Enter Password to Decrypt My Heart 💌</h2>
+        <h2>Enter Password to Unlock My Heart 💌</h2>
         <input type="password" id="password" placeholder="Enter password">
-        <br><br>
+        <br>
         <button onclick="checkPassword()">Unlock ❤️</button>
         <p id="hint" style="color:#ff4081; margin-top:10px;">
             Hint: It’s the number I can’t stop thinking about 😉
@@ -142,7 +124,7 @@
     <div id="quiz" class="hidden">
         <h1 class="glow">Love Quiz 💖</h1>
 
-        <!-- Questions 1-10 -->
+        <!-- Questions -->
         <div id="q1">
             <h2>What do I love most about you? 💖</h2>
             <button onclick="checkQ1('C')">A) Your smile 😊</button>
@@ -160,7 +142,7 @@
         </div>
 
         <div id="q3" class="hidden">
-            <h2>What’s the most likely nickname I’d give you? 💌</h2>
+            <h2>Most likely nickname for you 💌</h2>
             <button onclick="checkQ3('C')">A) Snugglebug</button>
             <button onclick="checkQ3('C')">B) Cutiepie</button>
             <button onclick="checkQ3('C')">C) Fish</button>
@@ -168,7 +150,7 @@
         </div>
 
         <div id="q4" class="hidden">
-            <h2>If we were a couple in a movie, what would be our scene? 🎬</h2>
+            <h2>Couple scene we'd have? 🎬</h2>
             <button onclick="checkQ4('C')">A) Walking in the rain ☔</button>
             <button onclick="checkQ4('C')">B) Dancing under the stars ✨</button>
             <button onclick="checkQ4('C')">C) Eating on the couch 🛋️</button>
@@ -184,23 +166,23 @@
         </div>
 
         <div id="q6" class="hidden">
-            <h2>What would I do if you steal my fries? 🍟</h2>
+            <h2>What if you steal my fries? 🍟</h2>
             <button onclick="checkQ6('C')">A) Give you a kiss 😘</button>
             <button onclick="checkQ6('C')">B) Cry dramatically 😢</button>
-            <button onclick="checkQ6('C')">C) Plot my sneaky revenge 😎</button>
+            <button onclick="checkQ6('C')">C) Plot sneaky revenge 😎</button>
             <p id="error6" style="color:red;"></p>
         </div>
 
         <div id="q7" class="hidden">
-            <h2>If I were a superhero, my power would be… 🦸‍♂️</h2>
-            <button onclick="checkQ7('A')">A) Making you smile instantly 😄</button>
-            <button onclick="checkQ7('A')">B) Hugging forever 🤗</button>
-            <button onclick="checkQ7('A')">C) Eating chocolate super fast 🍫</button>
+            <h2>Superpower just for you? 🦸‍♂️</h2>
+            <button onclick="checkQ7('A')">A) Make you laugh forever 😄</button>
+            <button onclick="checkQ7('A')">B) Hug forever 🤗</button>
+            <button onclick="checkQ7('A')">C) Eat chocolate super fast 🍫</button>
             <p id="error7" style="color:red;"></p>
         </div>
 
         <div id="q8" class="hidden">
-            <h2>What would I text you at 3 AM? 📱</h2>
+            <h2>3AM text from me? 📱</h2>
             <button onclick="checkQ8('B')">A) “I’m hungry… come over 😏”</button>
             <button onclick="checkQ8('B')">B) “Thinking about you again 😍”</button>
             <button onclick="checkQ8('B')">C) “Send memes pls 😂”</button>
@@ -208,22 +190,22 @@
         </div>
 
         <div id="q9" class="hidden">
-            <h2>Which outfit would I totally rock just to impress you? 👗👕</h2>
-            <button onclick="checkQ9('C')">A) Pajamas all day 😴</button>
-            <button onclick="checkQ9('C')">B) Fancy suit/dress ✨</button>
-            <button onclick="checkQ9('C')">C) Something ridiculously sexy 😜</button>
+            <h2>Outfit to impress you? 👗👕</h2>
+            <button onclick="checkQ9('C')">A) Pajamas 😴</button>
+            <button onclick="checkQ9('C')">B) Fancy dress ✨</button>
+            <button onclick="checkQ9('C')">C) Ridiculously sexy 😜</button>
             <p id="error9" style="color:red;"></p>
         </div>
 
         <div id="q10" class="hidden">
-            <h2>If I had to serenade you, what would I sing? 🎤</h2>
+            <h2>Serenade style? 🎤</h2>
             <button onclick="checkQ10('C')">A) Cheesy love song 💖</button>
             <button onclick="checkQ10('C')">B) Dramatic opera 😎</button>
             <button onclick="checkQ10('C')">C) Weird annoying sounds 😂</button>
             <p id="error10" style="color:red;"></p>
         </div>
 
-        <!-- FINAL ULTIMATE QUESTION -->
+        <!-- FINAL QUESTION -->
         <div id="qFinal" class="hidden">
             <h2>Will you be my Valentine… and stay mine forever? 💌❤️</h2>
             <button onclick="showFinal()">Yes, I’m yours forever ❤️</button>
@@ -234,14 +216,12 @@
 
     </div>
 
-    <!-- FINAL MESSAGE -->
-    <div id="loveMessage" class="hidden message">
-        <h1 class="glow">💖 You Did It, My Love! 💖</h1>
-        <p class="glow-text">
-            Congratulations, you unlocked my heart ❤️<br>
-            Every laugh, every hug, every silly moment makes my world brighter 🌟<br>
+    <!-- FINAL LOVE MESSAGE -->
+    <div id="loveMessage" class="hidden">
+        <h1 class="glow">💖 You Did It! 💖</h1>
+        <p>
+            Every laugh, hug, and silly moment makes my world brighter 🌟<br>
             Happy Valentine’s Day 😍<br>
-            I can’t wait for all the adventures, fun, and love we’ll share forever 💌<br>
             Forever yours, <br>
             <strong>Sarah 💕</strong>
         </p>
@@ -250,36 +230,88 @@
 
 </div>
 
-<!-- Piano Background Music -->
-<audio id="music" loop autoplay>
-    <source src="mixkit-love-787.mp3" type="audio/mpeg">
+<!-- Piano Music -->
+<audio id="music" loop>
+    <source src="https://raw.githubusercontent.com/Seyram-1/classified-message/main/mixkit-love-787.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-    // Password
-    function checkPassword() {
-        let p = document.getElementById("password").value;
-        if(p === "143") {
-            document.getElementById("login").classList.add("hidden");
-            document.getElementById("quiz").classList.remove("hidden");
-            document.getElementById("q1").classList.remove("hidden");
-        } else {
-            document.getElementById("error").innerText = "Wrong password 💔";
-        }
+function checkPassword() {
+    var pass = document.getElementById("password").value;
+    if(pass === "143") {
+        document.getElementById("login").classList.add("hidden");
+        document.getElementById("quiz").classList.remove("hidden");
+        document.getElementById("q1").classList.remove("hidden");
+        document.getElementById("music").play(); // play music after click
+    } else {
+        document.getElementById("error").innerText = "Wrong password 💔";
     }
+}
 
-    // Question checking
-    function checkQ1(a){ a==='C'? nextQ("q1","q2") : wrong("error1"); }
-    function checkQ2(a){ a==='A'? nextQ("q2","q3") : wrong("error2"); }
-    function checkQ3(a){ a==='C'? nextQ("q3","q4") : wrong("error3"); }
-    function checkQ4(a){ a==='C'? nextQ("q4","q5") : wrong("error4"); }
-    function checkQ5(a){ a==='A'? nextQ("q5","q6") : wrong("error5"); }
-    function checkQ6(a){ a==='C'? nextQ("q6","q7") : wrong("error6"); }
-    function checkQ7(a){ a==='A'? nextQ("q7","q8") : wrong("error7"); }
-    function checkQ8(a){ a==='B'? nextQ("q8","q9") : wrong("error8"); }
-    function checkQ9(a){ a==='C'? nextQ("q9","q10") : wrong("error9"); }
-    function checkQ10(a){ a==='C'? nextQ("q10","qFinal") : wrong("error10"); }
+// Question checking
+function checkQ1(a){ a==='C'? nextQ("q1","q2") : wrong("error1"); }
+function checkQ2(a){ a==='A'? nextQ("q2","q3") : wrong("error2"); }
+function checkQ3(a){ a==='C'? nextQ("q3","q4") : wrong("error3"); }
+function checkQ4(a){ a==='C'? nextQ("q4","q5") : wrong("error4"); }
+function checkQ5(a){ a==='A'? nextQ("q5","q6") : wrong("error5"); }
+function checkQ6(a){ a==='C'? nextQ("q6","q7") : wrong("error6"); }
+function checkQ7(a){ a==='A'? nextQ("q7","q8") : wrong("error7"); }
+function checkQ8(a){ a==='B'? nextQ("q8","q9") : wrong("error8"); }
+function checkQ9(a){ a==='C'? nextQ("q9","q10") : wrong("error9"); }
+function checkQ10(a){ a==='C'? nextQ("q10","qFinal") : wrong("error10"); }
 
-    function nextQ(hide, show){
-        do
+function nextQ(hide, show){
+    document.getElementById(hide).classList.add("hidden");
+    document.getElementById(show).classList.remove("hidden");
+}
 
+function wrong(id){
+    document.getElementById(id).innerText="Oops! Try again 😅";
+}
+
+function showFinal(){
+    document.getElementById("qFinal").classList.add("hidden");
+    document.getElementById("loveMessage").classList.remove("hidden");
+    launchConfetti();
+}
+
+function yes() {
+    alert("You just made the best decision of your life ❤️");
+    launchConfetti();
+}
+
+// Confetti
+function launchConfetti() {
+    const container = document.getElementById("confetti-container");
+    for(let i=0;i<150;i++){
+        const confetti = document.createElement("div");
+        confetti.innerText = "🎉💖✨";
+        confetti.className = "confetti";
+        confetti.style.left = Math.random()*100 + "%";
+        confetti.style.top = "-10px";
+        confetti.style.fontSize = (10+Math.random()*20)+"px";
+        confetti.style.opacity = Math.random();
+        confetti.style.transform = `rotate(${Math.random()*360}deg)`;
+        confetti.style.transition = "top 3s linear, transform 3s linear, opacity 3s linear";
+        container.appendChild(confetti);
+        setTimeout(()=>{ confetti.style.top = "100%"; confetti.style.transform = `rotate(${Math.random()*720}deg)`; confetti.style.opacity=0; },50);
+        setTimeout(()=>container.removeChild(confetti),3050);
+    }
+}
+
+// Floating hearts
+function createHeart() {
+    const container = document.getElementById("hearts-container");
+    const heart = document.createElement("div");
+    heart.innerText = "💖";
+    heart.className = "floating-heart";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+    container.appendChild(heart);
+    setTimeout(()=>{ container.removeChild(heart); }, 6000);
+}
+setInterval(createHeart, 500);
+
+</script>
+</body>
+</html>
