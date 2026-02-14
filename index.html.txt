@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Private Message</title>
+    <style>
+        body {
+            margin: 0;
+            background: black;
+            color: #ff4da6;
+            font-family: monospace;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 120px;
+        }
+
+        input {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 5px;
+            background: #ff4da6;
+            color: white;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .glow {
+            font-size: 60px;
+            color: #ff4da6;
+            text-shadow: 0 0 10px #ff4da6,
+                         0 0 20px #ff1a75,
+                         0 0 40px #ff0066;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- PASSWORD SCREEN -->
+    <div id="login">
+        <h2>Enter Password to Decrypt Message 💌</h2>
+        <input type="password" id="password" placeholder="Enter password">
+        <br>
+        <button onclick="checkPassword()">Unlock</button>
+        <p id="error" style="color:red;"></p>
+    </div>
+
+    <!-- MESSAGE SCREEN -->
+    <div id="message" class="hidden">
+        <h1 class="glow">SOLOMON</h1>
+
+        <h2>Click to Reveal Your Valentine Message ❤️</h2>
+        <button onclick="reveal()">Reveal</button>
+
+        <div id="loveMessage" class="hidden">
+            <p>
+                From Greater Accra to Central Region,<br>
+                distance has nothing on us.<br><br>
+
+                You are my favorite notification,<br>
+                my safest place,<br>
+                and my forever person.<br><br>
+
+                Happy Valentine's Day 💖<br><br>
+
+                Will you stay with me forever?
+            </p>
+
+            <button onclick="yes()">YES ❤️</button>
+        </div>
+    </div>
+
+</div>
+
+<audio id="music" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+    function checkPassword() {
+        var pass = document.getElementById("password").value;
+        if (pass === "143") {   // CHANGE THIS PASSWORD
+            document.getElementById("login").classList.add("hidden");
+            document.getElementById("message").classList.remove("hidden");
+            document.getElementById("music").play();
+        } else {
+            document.getElementById("error").innerText = "Wrong password 💔";
+        }
+    }
+
+    function reveal() {
+        document.getElementById("loveMessage").classList.remove("hidden");
+    }
+
+    function yes() {
+        alert("You just made the best decision of your life 💍❤️");
+    }
+</script>
+
+</body>
+</html>
