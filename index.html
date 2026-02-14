@@ -222,6 +222,16 @@
             <button onclick="checkQ10('C')">C) Weird annoying sounds 😂</button>
             <p id="error10" style="color:red;"></p>
         </div>
+
+        <!-- FINAL ULTIMATE QUESTION -->
+        <div id="qFinal" class="hidden">
+            <h2>Will you be my Valentine… and stay mine forever? 💌❤️</h2>
+            <button onclick="showFinal()">Yes, I’m yours forever ❤️</button>
+            <button onclick="wrong('errorFinal')">Maybe… 😅</button>
+            <button onclick="wrong('errorFinal')">Not today 😳</button>
+            <p id="errorFinal" style="color:red;"></p>
+        </div>
+
     </div>
 
     <!-- FINAL MESSAGE -->
@@ -235,14 +245,14 @@
             Forever yours, <br>
             <strong>Sarah 💕</strong>
         </p>
-        <button onclick="yes()" class="heart-button">💞 Yes, I’m yours 💞</button>
+        <button onclick="yes()" class="heart-button">💞 Celebrate Our Love 💞</button>
     </div>
 
 </div>
 
 <!-- Piano Background Music -->
 <audio id="music" loop autoplay>
-    <source src="romantic-piano.mp3" type="audio/mpeg">
+    <source src="mixkit-love-787.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -252,6 +262,7 @@
         if(p === "143") {
             document.getElementById("login").classList.add("hidden");
             document.getElementById("quiz").classList.remove("hidden");
+            document.getElementById("q1").classList.remove("hidden");
         } else {
             document.getElementById("error").innerText = "Wrong password 💔";
         }
@@ -267,65 +278,7 @@
     function checkQ7(a){ a==='A'? nextQ("q7","q8") : wrong("error7"); }
     function checkQ8(a){ a==='B'? nextQ("q8","q9") : wrong("error8"); }
     function checkQ9(a){ a==='C'? nextQ("q9","q10") : wrong("error9"); }
-    function checkQ10(a){ a==='C'? showFinal() : wrong("error10"); }
+    function checkQ10(a){ a==='C'? nextQ("q10","qFinal") : wrong("error10"); }
 
     function nextQ(hide, show){
-        document.getElementById(hide).classList.add("hidden");
-        document.getElementById(show).classList.remove("hidden");
-    }
-
-    function wrong(id){
-        document.getElementById(id).innerText="Oops! Try again 😅";
-    }
-
-    function showFinal(){
-        document.getElementById("q10").classList.add("hidden");
-        document.getElementById("loveMessage").classList.remove("hidden");
-    }
-
-    // Yes button + confetti
-    function yes() {
-        alert("You just made the best decision of your life ❤️");
-        launchConfetti();
-    }
-
-    function launchConfetti() {
-        const container = document.getElementById("confetti-container");
-        for(let i=0;i<150;i++){
-            const confetti = document.createElement("div");
-            confetti.innerText = "🎉💖✨";
-            confetti.className = "confetti";
-            confetti.style.left = Math.random()*100 + "%";
-            confetti.style.top = "-10px";
-            confetti.style.fontSize = (10+Math.random()*20)+"px";
-            confetti.style.opacity = Math.random();
-            confetti.style.transform = `rotate(${Math.random()*360}deg)`;
-            confetti.style.transition = "top 3s linear, transform 3s linear, opacity 3s linear";
-            container.appendChild(confetti);
-
-            setTimeout(()=>{
-                confetti.style.top = "100%";
-                confetti.style.transform = `rotate(${Math.random()*720}deg)`;
-                confetti.style.opacity = 0;
-            },50);
-
-            setTimeout(()=>container.removeChild(confetti),3050);
-        }
-    }
-
-    // Floating hearts
-    function createHeart() {
-        const container = document.getElementById("hearts-container");
-        const heart = document.createElement("div");
-        heart.innerText = "💖";
-        heart.className = "floating-heart";
-        heart.style.left = Math.random() * window.innerWidth + "px";
-        heart.style.animationDuration = (3 + Math.random() * 3) + "s";
-        container.appendChild(heart);
-        setTimeout(()=>{ container.removeChild(heart); }, 6000);
-    }
-    setInterval(createHeart, 500);
-</script>
-
-</body>
-</html>
+        do
